@@ -1,0 +1,16 @@
+Player {
+	attackPower = 3
+	HP = 100
+}
+
+Enemy {
+	attackPower = 3
+	HP = 100
+}
+
+## Player take will take turns attacking the enemy and the enemy will attack back.
+## The player attacks first.
+## If HP is - 1, player will die.
+## else enemy will die, if thier HP will fall below -1
+## After enemy dies, new one should appear. Same enemy.
+ 

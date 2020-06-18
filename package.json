@@ -1,0 +1,16 @@
+{
+  "name": "projectno2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1" ,
+    "dev": "elm-live src/Main.elm --start-page=index.html -- --debug --output=js/main.js",
+    "prod": "elm-live src/Main.elm --start-page=index.html -- --optimize --output=js/main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "elm-live": "^4.0.2"
+  }
+}
