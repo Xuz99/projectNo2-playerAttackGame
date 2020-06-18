@@ -3,7 +3,7 @@
 ## BRIEF
 **Develop a front-end web app/game of a player attack enemy game with a win screen.**
 
-[Live demo on Netlify]()
+[Live demo on Netlify](https://nervous-curran-955cb1.netlify.app/)
 
 ### The user/player must be able to do these things:
 
