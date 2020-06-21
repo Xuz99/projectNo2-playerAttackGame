@@ -4938,11 +4938,12 @@ function _Browser_load(url)
 		}
 	}));
 }
+var $elm$core$Basics$False = {$: 'False'};
 var $author$project$Main$Game = {$: 'Game'};
 var $author$project$Main$initEnemy = {attackPower: 1, hP: 4};
 var $author$project$Main$initEnemyDeaths = 0;
 var $author$project$Main$initPlayer = {attackPower: 3, hP: 10};
-var $author$project$Main$init = {enemy: $author$project$Main$initEnemy, enemyDeaths: $author$project$Main$initEnemyDeaths, page: $author$project$Main$Game, player: $author$project$Main$initPlayer};
+var $author$project$Main$init = {attacked: false, enemy: $author$project$Main$initEnemy, enemyDeaths: $author$project$Main$initEnemyDeaths, page: $author$project$Main$Game, player: $author$project$Main$initPlayer};
 var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
 var $elm$core$Basics$LT = {$: 'LT'};
@@ -5044,7 +5045,6 @@ var $elm$core$Result$Ok = function (a) {
 var $elm$json$Json$Decode$OneOf = function (a) {
 	return {$: 'OneOf', a: a};
 };
-var $elm$core$Basics$False = {$: 'False'};
 var $elm$core$Basics$add = _Basics_add;
 var $elm$core$Maybe$Just = function (a) {
 	return {$: 'Just', a: a};
@@ -10590,11 +10590,12 @@ var $author$project$Main$update = F2(
 				var newEnemy = (newHpFromEnemy <= 0) ? respawnEnemy : _Utils_update(
 					oldEnemy,
 					{hP: newHpFromEnemy});
+				var crossHair = true;
 				return (newEnemyDeaths >= 3) ? _Utils_update(
 					model,
 					{page: $author$project$Main$Win}) : _Utils_update(
 					model,
-					{enemy: newEnemy, enemyDeaths: newEnemyDeaths, player: newPlayer});
+					{attacked: crossHair, enemy: newEnemy, enemyDeaths: newEnemyDeaths, player: newPlayer});
 		}
 	});
 var $mdgriffith$elm_ui$Internal$Style$classes = {above: 'a', active: 'atv', alignBottom: 'ab', alignCenterX: 'cx', alignCenterY: 'cy', alignContainerBottom: 'acb', alignContainerCenterX: 'accx', alignContainerCenterY: 'accy', alignContainerRight: 'acr', alignLeft: 'al', alignRight: 'ar', alignTop: 'at', alignedHorizontally: 'ah', alignedVertically: 'av', any: 's', behind: 'bh', below: 'b', bold: 'w7', borderDashed: 'bd', borderDotted: 'bdt', borderNone: 'bn', borderSolid: 'bs', capturePointerEvents: 'cpe', clip: 'cp', clipX: 'cpx', clipY: 'cpy', column: 'c', container: 'ctr', contentBottom: 'cb', contentCenterX: 'ccx', contentCenterY: 'ccy', contentLeft: 'cl', contentRight: 'cr', contentTop: 'ct', cursorPointer: 'cptr', cursorText: 'ctxt', focus: 'fcs', focusedWithin: 'focus-within', fullSize: 'fs', grid: 'g', hasBehind: 'hbh', heightContent: 'hc', heightExact: 'he', heightFill: 'hf', heightFillPortion: 'hfp', hover: 'hv', imageContainer: 'ic', inFront: 'fr', inputLabel: 'lbl', inputMultiline: 'iml', inputMultilineFiller: 'imlf', inputMultilineParent: 'imlp', inputMultilineWrapper: 'implw', inputText: 'it', italic: 'i', link: 'lnk', nearby: 'nb', noTextSelection: 'notxt', onLeft: 'ol', onRight: 'or', opaque: 'oq', overflowHidden: 'oh', page: 'pg', paragraph: 'p', passPointerEvents: 'ppe', root: 'ui', row: 'r', scrollbars: 'sb', scrollbarsX: 'sbx', scrollbarsY: 'sby', seButton: 'sbt', single: 'e', sizeByCapital: 'cap', spaceEvenly: 'sev', strike: 'sk', text: 't', textCenter: 'tc', textExtraBold: 'w8', textExtraLight: 'w2', textHeavy: 'w9', textJustify: 'tj', textJustifyAll: 'tja', textLeft: 'tl', textLight: 'w3', textMedium: 'w5', textNormalWeight: 'w4', textRight: 'tr', textSemiBold: 'w6', textThin: 'w1', textUnitalicized: 'tun', transition: 'ts', transparent: 'clr', underline: 'u', widthContent: 'wc', widthExact: 'we', widthFill: 'wf', widthFillPortion: 'wfp', wrapped: 'wrp'};
@@ -16464,6 +16465,8 @@ var $mdgriffith$elm_ui$Element$image = F2(
 						$mdgriffith$elm_ui$Internal$Model$Unkeyed(_List_Nil))
 					])));
 	});
+var $mdgriffith$elm_ui$Internal$Model$Empty = {$: 'Empty'};
+var $mdgriffith$elm_ui$Element$none = $mdgriffith$elm_ui$Internal$Model$Empty;
 var $mdgriffith$elm_ui$Internal$Model$PaddingStyle = F5(
 	function (a, b, c, d, e) {
 		return {$: 'PaddingStyle', a: a, b: b, c: c, d: d, e: e};
@@ -16665,6 +16668,10 @@ var $author$project$Main$viewGame = function (model) {
 							_List_fromArray(
 								[
 									$mdgriffith$elm_ui$Element$text('Hello Enemy!'),
+									model.attacked ? A2(
+									$mdgriffith$elm_ui$Element$image,
+									_List_Nil,
+									{description: 'Attacking crosshair', src: '../imgs/crosshair.png'}) : $mdgriffith$elm_ui$Element$none,
 									$mdgriffith$elm_ui$Element$text(
 									'Enemy Health ' + $elm$core$String$fromInt(model.enemy.hP))
 								]))

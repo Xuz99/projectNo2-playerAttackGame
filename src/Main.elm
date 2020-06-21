@@ -24,6 +24,7 @@ type alias Model =
     , enemy : Enemy
     , enemyDeaths : Int
     , page : Page
+    , attacked : Bool
     }
 
 
@@ -49,6 +50,7 @@ init =
     , enemy = initEnemy
     , enemyDeaths = initEnemyDeaths
     , page = Game
+    , attacked = False
     }
 
 
@@ -91,6 +93,9 @@ update msg model =
 
         AttackEnemy ->
             let
+                crossHair =
+                    True
+
                 --NewEnemy
                 oldEnemy =
                     model.enemy
@@ -136,7 +141,7 @@ update msg model =
                 { model | page = Win }
 
             else
-                { model | enemy = newEnemy, player = newPlayer, enemyDeaths = newEnemyDeaths }
+                { model | enemy = newEnemy, player = newPlayer, enemyDeaths = newEnemyDeaths, attacked = crossHair }
 
 
 
@@ -213,6 +218,14 @@ viewGame model =
                             , Background.color (rgba255 211 74 40 0.9)
                             ]
                             [ text "Hello Enemy!"
+                            , if model.attacked then
+                                image []
+                                    { src = "../imgs/crosshair.png"
+                                    , description = "Attacking crosshair"
+                                    }
+
+                              else
+                                none
                             , text ("Enemy Health " ++ String.fromInt model.enemy.hP)
                             ]
                         ]

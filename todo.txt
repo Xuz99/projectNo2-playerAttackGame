@@ -1,0 +1,16 @@
+- change the ui to two chars attacking eachother.
+✔️ change the view. 
+✔️ player attacking enemy
+✔️ enemy attacking player
+- animation of each attack.
+
+✔️ - hit cross hair.
+onPress of attack enemy. Show cross hair. When enemy attcks. Remove pervious cross hair. Show new one on player.
+when msg attack enemy is clicked. model.attacked init = False, but if attacked then = True. if ture then show cross hair.
+
+model
+
+- audio of attack.
+- isometric character.
+- Boss enemy. Ugly fat captialist pig. 
+- audio
