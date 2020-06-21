@@ -16208,6 +16208,11 @@ var $author$project$Main$AttackEnemy = {$: 'AttackEnemy'};
 var $author$project$Main$ChangePage = function (a) {
 	return {$: 'ChangePage', a: a};
 };
+var $mdgriffith$elm_ui$Internal$Model$AlignY = function (a) {
+	return {$: 'AlignY', a: a};
+};
+var $mdgriffith$elm_ui$Internal$Model$Bottom = {$: 'Bottom'};
+var $mdgriffith$elm_ui$Element$alignBottom = $mdgriffith$elm_ui$Internal$Model$AlignY($mdgriffith$elm_ui$Internal$Model$Bottom);
 var $mdgriffith$elm_ui$Internal$Model$Button = {$: 'Button'};
 var $mdgriffith$elm_ui$Internal$Model$Describe = function (a) {
 	return {$: 'Describe', a: a};
@@ -16350,9 +16355,6 @@ var $mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
 };
 var $mdgriffith$elm_ui$Internal$Model$CenterX = {$: 'CenterX'};
 var $mdgriffith$elm_ui$Element$centerX = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$CenterX);
-var $mdgriffith$elm_ui$Internal$Model$AlignY = function (a) {
-	return {$: 'AlignY', a: a};
-};
 var $mdgriffith$elm_ui$Internal$Model$CenterY = {$: 'CenterY'};
 var $mdgriffith$elm_ui$Element$centerY = $mdgriffith$elm_ui$Internal$Model$AlignY($mdgriffith$elm_ui$Internal$Model$CenterY);
 var $mdgriffith$elm_ui$Element$Background$color = function (clr) {
@@ -16385,13 +16387,39 @@ var $mdgriffith$elm_ui$Element$column = F2(
 						attrs))),
 			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
 	});
-var $elm$html$Html$Attributes$alt = $elm$html$Html$Attributes$stringProperty('alt');
+var $elm$html$Html$audio = _VirtualDom_node('audio');
+var $elm$html$Html$Attributes$autoplay = $elm$html$Html$Attributes$boolProperty('autoplay');
+var $elm$html$Html$Attributes$controls = $elm$html$Html$Attributes$boolProperty('controls');
+var $mdgriffith$elm_ui$Internal$Model$unstyled = A2($elm$core$Basics$composeL, $mdgriffith$elm_ui$Internal$Model$Unstyled, $elm$core$Basics$always);
+var $mdgriffith$elm_ui$Element$html = $mdgriffith$elm_ui$Internal$Model$unstyled;
+var $elm$html$Html$source = _VirtualDom_node('source');
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
+var $author$project$Main$htmlBackgroundAudio = $mdgriffith$elm_ui$Element$html(
+	A2(
+		$elm$html$Html$audio,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$autoplay(true),
+				$elm$html$Html$Attributes$controls(true)
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$source,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$src('https://freepd.com/music/After%20the%20End.mp3'),
+						$elm$html$Html$Attributes$type_('audio/mpeg')
+					]),
+				_List_Nil),
+				$elm$html$Html$text('Your browser does not support the audio element.')
+			])));
+var $elm$html$Html$Attributes$alt = $elm$html$Html$Attributes$stringProperty('alt');
 var $mdgriffith$elm_ui$Element$image = F2(
 	function (attrs, _v0) {
 		var src = _v0.src;
@@ -16453,6 +16481,40 @@ var $mdgriffith$elm_ui$Element$padding = function (x) {
 			f,
 			f,
 			f));
+};
+var $mdgriffith$elm_ui$Internal$Model$paddingName = F4(
+	function (top, right, bottom, left) {
+		return 'pad-' + ($elm$core$String$fromInt(top) + ('-' + ($elm$core$String$fromInt(right) + ('-' + ($elm$core$String$fromInt(bottom) + ('-' + $elm$core$String$fromInt(left)))))));
+	});
+var $mdgriffith$elm_ui$Element$paddingEach = function (_v0) {
+	var top = _v0.top;
+	var right = _v0.right;
+	var bottom = _v0.bottom;
+	var left = _v0.left;
+	if (_Utils_eq(top, right) && (_Utils_eq(top, bottom) && _Utils_eq(top, left))) {
+		var topFloat = top;
+		return A2(
+			$mdgriffith$elm_ui$Internal$Model$StyleClass,
+			$mdgriffith$elm_ui$Internal$Flag$padding,
+			A5(
+				$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
+				'p-' + $elm$core$String$fromInt(top),
+				topFloat,
+				topFloat,
+				topFloat,
+				topFloat));
+	} else {
+		return A2(
+			$mdgriffith$elm_ui$Internal$Model$StyleClass,
+			$mdgriffith$elm_ui$Internal$Flag$padding,
+			A5(
+				$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
+				A4($mdgriffith$elm_ui$Internal$Model$paddingName, top, right, bottom, left),
+				top,
+				right,
+				bottom,
+				left));
+	}
 };
 var $mdgriffith$elm_ui$Element$rgb255 = F3(
 	function (red, green, blue) {
@@ -16555,51 +16617,75 @@ var $author$project$Main$viewGame = function (model) {
 							})
 						]))
 				])) : A2(
-			$mdgriffith$elm_ui$Element$row,
+			$mdgriffith$elm_ui$Element$column,
 			_List_fromArray(
 				[$mdgriffith$elm_ui$Element$centerX, $mdgriffith$elm_ui$Element$centerY]),
 			_List_fromArray(
 				[
 					A2(
-					$mdgriffith$elm_ui$Element$column,
+					$mdgriffith$elm_ui$Element$row,
+					_List_Nil,
 					_List_fromArray(
 						[
-							$mdgriffith$elm_ui$Element$padding(100),
-							$mdgriffith$elm_ui$Element$Background$color(
-							A4($mdgriffith$elm_ui$Element$rgba255, 211, 74, 40, 0.9))
-						]),
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$text('Hello Player!'),
-							$mdgriffith$elm_ui$Element$text(
-							'Player Health ' + $elm$core$String$fromInt(model.player.hP)),
 							A2(
-							$mdgriffith$elm_ui$Element$Input$button,
+							$mdgriffith$elm_ui$Element$column,
 							_List_fromArray(
 								[
-									$mdgriffith$elm_ui$Element$padding(10),
+									$mdgriffith$elm_ui$Element$padding(100),
 									$mdgriffith$elm_ui$Element$Background$color(
-									A3($mdgriffith$elm_ui$Element$rgb255, 102, 168, 135)),
-									$mdgriffith$elm_ui$Element$Font$size(12)
+									A4($mdgriffith$elm_ui$Element$rgba255, 211, 74, 40, 0.9))
 								]),
-							{
-								label: $mdgriffith$elm_ui$Element$text('Attack Enemy!'),
-								onPress: $elm$core$Maybe$Just($author$project$Main$AttackEnemy)
-							})
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$text('Hello Player!'),
+									$mdgriffith$elm_ui$Element$text(
+									'Player Health ' + $elm$core$String$fromInt(model.player.hP)),
+									A2(
+									$mdgriffith$elm_ui$Element$Input$button,
+									_List_fromArray(
+										[
+											$mdgriffith$elm_ui$Element$padding(10),
+											$mdgriffith$elm_ui$Element$Background$color(
+											A3($mdgriffith$elm_ui$Element$rgb255, 102, 168, 135)),
+											$mdgriffith$elm_ui$Element$Font$size(12)
+										]),
+									{
+										label: $mdgriffith$elm_ui$Element$text('Attack Enemy!'),
+										onPress: $elm$core$Maybe$Just($author$project$Main$AttackEnemy)
+									})
+								])),
+							A2(
+							$mdgriffith$elm_ui$Element$column,
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$padding(100),
+									$mdgriffith$elm_ui$Element$Background$color(
+									A4($mdgriffith$elm_ui$Element$rgba255, 211, 74, 40, 0.9))
+								]),
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$text('Hello Enemy!'),
+									$mdgriffith$elm_ui$Element$text(
+									'Enemy Health ' + $elm$core$String$fromInt(model.enemy.hP))
+								]))
 						])),
 					A2(
-					$mdgriffith$elm_ui$Element$column,
+					$mdgriffith$elm_ui$Element$row,
 					_List_fromArray(
 						[
-							$mdgriffith$elm_ui$Element$padding(100),
-							$mdgriffith$elm_ui$Element$Background$color(
-							A4($mdgriffith$elm_ui$Element$rgba255, 211, 74, 40, 0.9))
+							$mdgriffith$elm_ui$Element$centerX,
+							$mdgriffith$elm_ui$Element$centerY,
+							$mdgriffith$elm_ui$Element$alignBottom,
+							$mdgriffith$elm_ui$Element$paddingEach(
+							{bottom: 0, left: 0, right: 0, top: 100})
 						]),
 					_List_fromArray(
 						[
-							$mdgriffith$elm_ui$Element$text('Hello Enemy!'),
-							$mdgriffith$elm_ui$Element$text(
-							'Enemy Health ' + $elm$core$String$fromInt(model.enemy.hP))
+							A2(
+							$mdgriffith$elm_ui$Element$column,
+							_List_Nil,
+							_List_fromArray(
+								[$author$project$Main$htmlBackgroundAudio]))
 						]))
 				])));
 	} else {

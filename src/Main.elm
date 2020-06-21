@@ -8,6 +8,7 @@ import Element.Events as Events
 import Element.Font as Font
 import Element.Input as Input
 import Html
+import Html.Attributes
 
 
 main =
@@ -148,6 +149,16 @@ view model =
         (viewGame model)
 
 
+htmlBackgroundAudio : Element msg
+htmlBackgroundAudio =
+    Element.html
+        (Html.audio [ Html.Attributes.autoplay True, Html.Attributes.controls True ]
+            [ Html.source [ Html.Attributes.src "https://freepd.com/music/After%20the%20End.mp3", Html.Attributes.type_ "audio/mpeg" ] []
+            , Html.text "Your browser does not support the audio element."
+            ]
+        )
+
+
 viewGame : Model -> Element Msg
 viewGame model =
     case model.page of
@@ -186,22 +197,29 @@ viewGame model =
                     ]
 
             else
-                row [ centerX, centerY ]
-                    [ column
-                        [ padding 100
-                        , Background.color (rgba255 211 74 40 0.9)
+                column [ centerX, centerY ]
+                    [ row []
+                        [ column
+                            [ padding 100
+                            , Background.color (rgba255 211 74 40 0.9)
+                            ]
+                            [ text "Hello Player!"
+                            , text ("Player Health " ++ String.fromInt model.player.hP)
+                            , Input.button [ padding 10, Background.color (rgb255 102 168 135), Font.size 12 ]
+                                { onPress = Just AttackEnemy, label = text "Attack Enemy!" }
+                            ]
+                        , column
+                            [ padding 100
+                            , Background.color (rgba255 211 74 40 0.9)
+                            ]
+                            [ text "Hello Enemy!"
+                            , text ("Enemy Health " ++ String.fromInt model.enemy.hP)
+                            ]
                         ]
-                        [ text "Hello Player!"
-                        , text ("Player Health " ++ String.fromInt model.player.hP)
-                        , Input.button [ padding 10, Background.color (rgb255 102 168 135), Font.size 12 ]
-                            { onPress = Just AttackEnemy, label = text "Attack Enemy!" }
-                        ]
-                    , column
-                        [ padding 100
-                        , Background.color (rgba255 211 74 40 0.9)
-                        ]
-                        [ text "Hello Enemy!"
-                        , text ("Enemy Health " ++ String.fromInt model.enemy.hP)
+                    , row
+                        [ centerX, centerY, alignBottom, paddingEach { top = 100, right = 0, bottom = 0, left = 0 } ]
+                        [ column []
+                            [ htmlBackgroundAudio ]
                         ]
                     ]
 
